@@ -50,12 +50,12 @@
  "tvinfo": [
   {
    "name": "syncExecute tvinfo/initialData",
-   "result": "{\"ret\":true,\"msg\":{\"tvLogo\":\"his\",\"tvBrand\":\"Hisense\",\"modelName\":\"65Q60SEVS_01\",\"serialType\":\"65E7SE\",\"deviceID\":\"<device-id>\",\"capabilityCode\":\"2025123003\",\"featureCode\":\"<device-id>\",\"softwareVersion\":\"V0000.09.60V.Q0612\",\"chipsetName\":\"MTK9603\",\"region\":\"EU_A\",\"4kState\":1},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "result": "{\"ret\": true, \"msg\": {\"tvLogo\": \"his\", \"tvBrand\": \"Hisense\", \"modelName\": \"65Q60SEVS_01\", \"serialType\": \"<redacted>\", \"deviceID\": \"<redacted>\", \"capabilityCode\": \"<redacted>\", \"featureCode\": \"<redacted>\", \"softwareVersion\": \"V0000.09.60V.Q0612\", \"chipsetName\": \"MTK9603\", \"region\": \"EU_A\", \"4kState\": 1}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "bytes": 366
   },
   {
    "name": "HiUtils tvinfo/initialData",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "bytes": 71
   },
   {
@@ -69,15 +69,15 @@
  "fileread": [
   {
    "form": "plain",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "identifier",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "session0",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   }
  ],
  "cookies": "",

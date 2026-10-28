@@ -39,39 +39,39 @@
   },
   {
    "api": "getAppInfo",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getAppConfig",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getAppList",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getPkgInfo",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getPermissions",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getStartupApps",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getRunningApps",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getAppDetail",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getStoreInfo",
-   "result": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}"
   }
  ],
  "exec": [

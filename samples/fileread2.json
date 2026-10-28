@@ -4,43 +4,43 @@
  "shapes": [
   {
    "shape": "dir=/ path=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "dir=/etc path=x",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedversion\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedversion\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "base=/ path=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "root=/ path=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "baseDir=/ p=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "folder=/ path=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "dir='' path=abs",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "path+prefix",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "src=/ path=rel",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefinedetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefinedetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "shape": "url=file:///",
-   "result": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   }
  ],
  "env": {

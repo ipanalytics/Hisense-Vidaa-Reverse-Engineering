@@ -18,13 +18,13 @@
   {
    "label": "vowOS keys",
    "ok": true,
-   "value": "[\"service\",\"tvinfo\",\"store\"]",
+   "value": "[\"service\", \"tvinfo\", \"store\"]",
    "error": null
   },
   {
    "label": "vowOS.service keys",
    "ok": true,
-   "value": "[\"socket\",\"port\",\"session_array\",\"session\",\"msgs\",\"httpRequest\",\"getIdentifier\",\"isObject\",\"httpOption\",\"portValidated\",\"httpServeLostErrNum\",\"wssServeLostErrNum\",\"launchTimer\",\"reLaunchService\",\"syncExecute\",\"executeHttpRequest\",\"processResponse\",\"execute\",\"socketonopen\",\"socketonmessage\",\"socketonclose\",\"socketonerror\"]",
+   "value": "[\"socket\", \"port\", \"session_array\", \"session\", \"msgs\", \"httpRequest\", \"getIdentifier\", \"isObject\", \"httpOption\", \"portValidated\", \"httpServeLostErrNum\", \"wssServeLostErrNum\", \"launchTimer\", \"reLaunchService\", \"syncExecute\", \"executeHttpRequest\", \"processResponse\", \"execute\", \"socketonopen\", \"socketonmessage\", \"socketonclose\", \"socketonerror\"]",
    "error": null
   },
   {
@@ -42,7 +42,7 @@
   {
    "label": "omi_platform keys",
    "ok": true,
-   "value": "[\"addPlatformEventListener\",\"sendPlatformMessage\"]",
+   "value": "[\"addPlatformEventListener\", \"sendPlatformMessage\"]",
    "error": null
   },
   {
@@ -78,85 +78,85 @@
   {
    "label": "hiutils getOSVersion",
    "ok": true,
-   "value": "{\"ret\":true,\"msg\":\"U09.60\",\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": true, \"msg\": \"U09.60\", \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "hiutils getVersionStatus",
    "ok": true,
-   "value": "{\"ret\":true,\"msg\":\"release\",\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": true, \"msg\": \"release\", \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "hiutils deviceCode",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "fileRead(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "fileRead({path})",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/passwd\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/passwd\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "fileRead({filePath})",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "fileRead({filename})",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "readFile(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "getFile(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "readfile(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "file_read(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "getFileContent(string)",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "label": "syncExecute hiutils/fileRead",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "value": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "error": null
   },
   {
    "label": "syncExecute hiutils/getFileList",
    "ok": true,
-   "value": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "value": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {

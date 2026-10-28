@@ -241,32 +241,32 @@
   {
    "form": "args=[]",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "args=[MARK/, path]",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "args=[path]",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "args=null",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "args={}",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "form": "args=0",
    "ret": false,
-   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "path": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   }
  ],
  "sources": {

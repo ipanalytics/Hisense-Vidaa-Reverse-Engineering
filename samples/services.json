@@ -5,98 +5,98 @@
    "name": "hiutils",
    "url": "https://localhost:9888/service/hiutils?api=getInstalledPkgs&args=%22%22",
    "status": 200,
-   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"session\": -1, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "files",
    "url": "https://localhost:9888/service/files?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/files?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/files?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "tvapi",
    "url": "https://localhost:9888/service/tvapi?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/tvapi?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/tvapi?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "file",
    "url": "https://localhost:9888/service/file?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/file?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/file?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "tvinfo",
    "url": "https://localhost:9888/service/tvinfo?api=getInstalledPkgs&args=%22%22",
    "status": 200,
-   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Not supported api\", \"code\": 500, \"session\": -1, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "appconfig",
    "url": "https://localhost:9888/service/appconfig?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/appconfig?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/appconfig?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "system",
    "url": "https://localhost:9888/service/system?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/system?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/system?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "upgrade",
    "url": "https://localhost:9888/service/upgrade?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/upgrade?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/upgrade?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "ota",
    "url": "https://localhost:9888/service/ota?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/ota?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/ota?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "debug",
    "url": "https://localhost:9888/service/debug?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/debug?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/debug?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "shell",
    "url": "https://localhost:9888/service/shell?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/shell?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/shell?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "exec",
    "url": "https://localhost:9888/service/exec?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/exec?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/exec?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "network",
    "url": "https://localhost:9888/service/network?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/network?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/network?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
    "name": "log",
    "url": "https://localhost:9888/service/log?api=getInstalledPkgs&args=%22%22",
    "status": 404,
-   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/log?api=getInstalledPkgs&args=%22%22\",\"code\":500,\"sdkVersion\":\"1.5.0\"}",
+   "text": "{\"ret\": false, \"msg\": \"Wrong request:/service/log?api=getInstalledPkgs&args=%22%22\", \"code\": 500, \"sdkVersion\": \"1.5.0\"}",
    "error": null
   },
   {
@@ -110,49 +110,49 @@
  "apis": [
   {
    "api": "fileRead",
-   "result": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "api": "fileWrite",
-   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "getVersionStatus",
-   "result": "{\"ret\":true,\"msg\":\"release\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": true, \"msg\": \"release\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "api": "getOSVersion",
-   "result": "{\"ret\":true,\"msg\":\"U09.60\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": true, \"msg\": \"U09.60\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "api": "deviceCode",
-   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}"
   },
   {
    "api": "uninstallApp",
-   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}"
+   "result": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}"
   }
  ],
  "traversal": [
   {
    "path": "../../../../../../etc/version",
-   "result": "{\"ret\":false,\"msg\":\"invalid path:../../../../../../etc/version\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": \"invalid path:../../../../../../etc/version\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "path": "../../../../etc/version",
-   "result": "{\"ret\":false,\"msg\":\"invalid path:../../../../etc/version\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": \"invalid path:../../../../etc/version\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "path": "..%2f..%2f..%2fetc/version",
-   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined..%2f..%2f..%2fetc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined..%2f..%2f..%2fetc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "path": "/../../etc/version",
-   "result": "{\"ret\":false,\"msg\":\"invalid path:/../../etc/version\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": \"invalid path:/../../etc/version\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   },
   {
    "path": "APPS:pkgs/../../etc/version",
-   "result": "{\"ret\":false,\"msg\":\"invalid path:APPS:pkgs/../../etc/version\",\"sdkVersion\":\"1.5.0\",\"code\":0}"
+   "result": "{\"ret\": false, \"msg\": \"invalid path:APPS:pkgs/../../etc/version\", \"sdkVersion\": \"1.5.0\", \"code\": 0}"
   }
  ],
  "resources": [

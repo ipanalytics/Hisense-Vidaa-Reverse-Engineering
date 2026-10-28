@@ -17,80 +17,80 @@
   {
    "id": "tv.vidaa.app.browser",
    "getIdent": "tv.vidaa.app.browser",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "com.hisense.browser",
    "getIdent": "com.hisense.browser",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "tv.vidaa.res.iot",
    "getIdent": "tv.vidaa.res.iot",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "system",
    "getIdent": "system",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "root",
    "getIdent": "root",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "vidaa",
    "getIdent": "vidaa",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "hisense",
    "getIdent": "hisense",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "tv.vidaa.app.settings",
    "getIdent": "tv.vidaa.app.settings",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "browser",
    "getIdent": "browser",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   },
   {
    "id": "",
    "getIdent": "",
-   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
-   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "deviceCode": "{\"ret\": false, \"msg\": \"client request permission check error, please check appconfig\", \"code\": 503, \"sdkVersion\": \"1.5.0\"}",
+   "fileRead": "{\"ret\": false, \"msg\": {\"errno\": -2, \"code\": \"ENOENT\", \"syscall\": \"open\", \"path\": \"undefined/etc/version\"}, \"sdkVersion\": \"1.5.0\", \"code\": 0}",
    "devOk": false,
    "stillUndefined": true
   }

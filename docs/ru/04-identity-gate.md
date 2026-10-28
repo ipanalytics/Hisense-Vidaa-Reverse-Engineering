@@ -1,5 +1,7 @@
 # 4. Гейт идентичности и appconfig
 
+**English version: [docs/04-identity-gate.md](../04-identity-gate.md)**
+
 Всё привилегированное на этой прошивке отказывает одной и той же фразой:
 
 ```json

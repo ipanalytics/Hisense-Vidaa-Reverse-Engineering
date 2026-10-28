@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv raw ws + setparam</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>свой websocket, register, сеттеры <small class="dim">только чтение, кроме записи того же значения</small></h1>
+<div id="log"></div>
+<script>
+/* 1) Свой wss://localhost:9888 мимо SDK: можно ли послать method:'register'.
+   2) __omi_window_type и DIAL-флаг.
+   3) TvInfo_setParam: читаем ключ и записываем ТО ЖЕ значение назад —
+      это проверяет существование сеттера, не меняя состояние. */
+var API = "", out = { env: {}, ws: [], events: [], setters: [] };
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 400); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function js(v) { try { return JSON.stringify(v).slice(0, 400); } catch (e) { return String(v).slice(0, 200); } }
+function safe(f) { try { return String(f()); } catch (e) { return "err:" + (e && e.message || e); } }
+
+out.env = {
+  omi_window_type: safe(function () { return window.__omi_window_type; }),
+  has_omi_platform: String(typeof window.omi_platform),
+  dial_info: safe(function () { return js(window.Hisense_GetDialInfo()); }),
+  currentBrowser: safe(function () { return window.Hisense_GetCurrentBrowser(); }),
+  navAppIdentifier: safe(function () { return navigator.appIdentifier; }),
+  ctxInit: safe(function () { return window.vowOSContext.init(); })
+};
+for (var k in out.env) log(k + " = " + out.env[k], "dim");
+
+/* ---------- 1. свой сокет ---------- */
+var FORMS = [
+  { path: "phoenix://service/hiutils", method: "callAPI", parameters: { api: "deviceCode" }, session: 9001, timeout: 10, identifier: "tv.vidaa.app.browser" },
+  { path: "phoenix://service/hiutils", method: "register", parameters: { api: "getOSVersion" }, session: 9002, timeout: 10, identifier: "" },
+  { path: "phoenix://service/hiutils", method: "register", parameters: { api: "deviceCode" }, session: 9003, timeout: 10, identifier: "tv.vidaa.app.browser" },
+  { path: "phoenix://service/tvinfo", method: "register", parameters: { api: "initialData" }, session: 9004, timeout: 10, identifier: "" },
+  { path: "phoenix://service/hiutils", method: "callAPI", parameters: { api: "fileRead", args: { path: "/etc/version" } }, session: 9005, timeout: 10, identifier: "" }
+];
+
+var ws = null, done = false;
+try {
+  ws = new WebSocket("wss://localhost:9888");
+  ws.onopen = function () {
+    log("сокет открыт, шлю " + FORMS.length + " сообщений", "ok");
+    FORMS.forEach(function (f) { ws.send(JSON.stringify(f)); });
+  };
+  ws.onmessage = function (e) {
+    var t = String(e.data);
+    var rec = { raw: t.slice(0, 500) };
+    try {
+      var p = JSON.parse(t);
+      rec.session = p.session; rec.ret = p.ret;
+      rec.event = p.event; rec.code = p.code;
+      rec.msg = (typeof p.msg === "string") ? p.msg : js(p.msg);
+      if (p.event) out.events.push(rec);
+    } catch (err) { rec.parse_error = String(err); }
+    out.ws.push(rec);
+    log("ws <- s=" + rec.session + " ret=" + rec.ret + " ev=" + (rec.event || "-") + " " + String(rec.msg || "").slice(0, 110),
+        rec.ret === true ? "ok" : (rec.event ? "hit" : "dim"));
+  };
+  ws.onerror = function () { log("сокет: ошибка", "bad"); };
+  ws.onclose = function () { log("сокет закрыт", "dim"); };
+} catch (e) {
+  log("сокет не открылся: " + e.message, "bad");
+  done = true;
+}
+
+/* ---------- 2. сеттеры: чтение и запись того же значения ---------- */
+var KEYS = ["brightness","contrast","kidsMode","artMode","storeMode","isHotelMode","hotelMode",
+            "dabTools","volume","mute","magnificationEnable","ttsEnable","featureCode","region",
+            "country","panelType","source","menuScheme","menuTransparency"];
+function setters() {
+  KEYS.forEach(function (key) {
+    var before = null, berr = null;
+    try { before = window.TvInfo_getParam(key); } catch (e) { berr = String(e && e.message || e); }
+    var rec = { key: key, before: js(before), readError: berr, write: null };
+    if (berr === null) {
+      try {
+        var r = window.TvInfo_setParam(key, before);
+        rec.write = "ok:" + js(r);
+      } catch (e) { rec.write = "err:" + (e && e.message || e); }
+    }
+    out.setters.push(rec);
+    log("setParam " + key + " (значение " + js(before) + ") -> " + rec.write, rec.write && rec.write.indexOf("err") !== 0 ? "ok" : "dim");
+  });
+}
+
+setTimeout(function () {
+  setters();
+  setTimeout(function () {
+    try { if (ws) ws.close(); } catch (e) {}
+    post("/probe", Object.assign({ name: "rawws" }, out), function (st) {
+      log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+    });
+  }, 9000);
+}, 3000);
+</script>
+</body>
+</html>

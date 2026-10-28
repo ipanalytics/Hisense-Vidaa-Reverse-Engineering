@@ -1,5 +1,7 @@
 # 6. Negative results
 
+**Русская версия: [docs/ru/06-negative-results.md](ru/06-negative-results.md)**
+
 Everything below was tried on the test device and **did not work**. Recorded so
 the next person does not repeat it.
 

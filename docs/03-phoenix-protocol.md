@@ -1,5 +1,7 @@
 # 3. The `phoenix://` bridge protocol
 
+**Русская версия: [docs/ru/03-phoenix-protocol.md](ru/03-phoenix-protocol.md)**
+
 The vendor SDK shipped into the TV's web layer speaks a small message protocol
 over a WebSocket, with an HTTP fallback that uses the same body shape.
 

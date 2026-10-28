@@ -1,5 +1,7 @@
 # 1. Firmware container (`usb_*.bin` / `MstarUpgrade.bin`)
 
+**Русская версия: [docs/ru/01-firmware-container.md](ru/01-firmware-container.md)**
+
 Sample obtained from Hisense support on request, delivered by the German
 distributor as a signed Salesforce download link. Nothing here requires that
 file: verify your own copy with the hash below.

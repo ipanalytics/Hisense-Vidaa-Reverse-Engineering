@@ -1,5 +1,7 @@
 # 2b. What the TV exposes to the LAN
 
+**Русская версия: [docs/ru/02b-upnp-and-lan.md](ru/02b-upnp-and-lan.md)**
+
 Everything in [document two](02-local-services.md) is reachable only from inside
 the TV. This one is the opposite view: what answers from another machine on the
 same network.

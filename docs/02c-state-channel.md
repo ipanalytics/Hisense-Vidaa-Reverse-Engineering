@@ -1,5 +1,7 @@
 # 2c. The one confirmed write channel: `TvInfo_setParam`
 
+**Русская версия: [docs/ru/02c-state-channel.md](ru/02c-state-channel.md)**
+
 Everything that touches files is gated. One thing is not: the state channel.
 A page rendered by the TV can write device settings through a native function
 with no application identity, no `appconfig` check and no session at all.

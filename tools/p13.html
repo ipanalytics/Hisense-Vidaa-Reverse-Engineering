@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv pkgmgr install probe</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>pkgmgr: матрица имён установки <small class="dim">ОСОЗНАННАЯ ЗАПИСЬ</small></h1>
+<div id="log"></div>
+<script>
+/* Единственная осознанная запись в исследовании: пробуем GET-форму pkgmgr
+   с именами installApp / installPkg / install. Сначала контрольное имя,
+   чтобы убедиться, что "Not supported api" приходит без побочных эффектов.
+   Откат штатный: My Apps -> удалить. */
+var API = "";
+var BASE = "https://localhost:9888/service/pkgmgr";
+var out = { calls: [], before: null, after: null };
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 400); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function get(name, args, cb) {
+  var url = BASE + "?api=" + encodeURIComponent(name) + "&args=" + encodeURIComponent(JSON.stringify(args));
+  var rec = { api: name, args: args, status: null, text: null, error: null };
+  try {
+    var x = new XMLHttpRequest();
+    x.open("GET", url, true);
+    x.timeout = 8000;
+    x.onload = function () { rec.status = x.status; rec.text = String(x.responseText || "").slice(0, 600); cb(rec); };
+    x.onerror = function () { rec.error = "onerror"; cb(rec); };
+    x.ontimeout = function () { rec.error = "timeout"; cb(rec); };
+    x.send();
+  } catch (e) { rec.error = String(e && e.message || e); cb(rec); }
+}
+function pkgList(cb) {
+  get("getInstalledPkgs", "", function (r) {
+    out.beforeRaw = String(r.text || r.error).slice(0, 400);
+    var names = [];
+    try {
+      var j = JSON.parse(r.text);
+      if (j.ret && j.msg) for (var i = 0; i < j.msg.length; i++) names.push(j.msg[i].name);
+    } catch (e) {}
+    cb(names, r);
+  });
+}
+
+var P = { appId: "zqtest", appName: "ZQ Test",
+          appUrl: "http://<collector-host>:8090/p11.html" };
+var NAMES = ["definitelyNotAnApi", "installApp", "install", "installPkg", "installPackage",
+             "appInstall", "installAppPkg", "installUrl", "upgradeApp", "updateApp", "publishApp"];
+var SHAPES = [{ label: "direct", args: P }, { label: "appinfo", args: { appinfo: P } }];
+
+var tasks = [];
+for (var n = 0; n < NAMES.length; n++) {
+  if (NAMES[n] === "definitelyNotAnApi") { tasks.push({ api: NAMES[n], shape: SHAPES[0] }); continue; }
+  for (var s = 0; s < SHAPES.length; s++) tasks.push({ api: NAMES[n], shape: SHAPES[s] });
+}
+log("задач: " + tasks.length, "dim");
+
+pkgList(function (names, raw) {
+  out.before = names;
+  log("до: пакетов " + names.length + (names.indexOf("zqtest") >= 0 ? ", zqtest уже есть" : ", zqtest нет"), "dim");
+
+  var i = 0;
+  (function next() {
+    if (i >= tasks.length) return after();
+    var t = tasks[i++];
+    get(t.api, t.shape.args, function (r) {
+      var s = String(r.text || r.error);
+      out.calls.push({ api: t.api, shape: t.shape.label, status: r.status, text: s, error: r.error });
+      var cls = s.indexOf("Not supported api") >= 0 ? "dim" : (s.indexOf("503") >= 0 ? "bad" : "hit");
+      log(t.api + " [" + t.shape.label + "] -> " + (r.status || r.error) + " " + s.slice(0, 140), cls);
+      setTimeout(next, 900);
+    });
+  })();
+});
+
+function after() {
+  log("перечитываю список пакетов…", "dim");
+  pkgList(function (names, raw) {
+    out.after = names;
+    out.afterRaw = String(raw.text || raw.error).slice(0, 400);
+    var added = names.filter(function (n) { return out.before.indexOf(n) < 0; });
+    log("после: пакетов " + names.length + ", новых: " + (added.length ? added.join(", ") : "нет"),
+        added.length ? "hit" : "dim");
+    post("/probe", Object.assign({ name: "pkgmgr-install" }, out), function (st) {
+      log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+    });
+  });
+}
+</script>
+</body>
+</html>

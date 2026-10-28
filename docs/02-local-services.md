@@ -1,5 +1,7 @@
 # 2. Local services on the TV
 
+**Русская версия: [docs/ru/02-local-services.md](ru/02-local-services.md)**
+
 Any HTML document rendered on the TV can reach the local service API:
 
 ```

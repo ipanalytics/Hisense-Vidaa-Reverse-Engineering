@@ -1,5 +1,7 @@
 # 7. Tooling
 
+**Русская версия: [docs/ru/07-tooling.md](ru/07-tooling.md)**
+
 ## Probe pages (`tools/`)
 
 Ten HTML pages, each one a single self-contained file that runs on the TV and

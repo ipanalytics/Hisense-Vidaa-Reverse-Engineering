@@ -1,5 +1,7 @@
 # 5. Bridge surface — 96 host functions
 
+**Русская версия: [docs/ru/05-bridge-surface.md](ru/05-bridge-surface.md)**
+
 `window` on any page rendered by the TV browser is populated with the vendor
 bridge. The inventory is collected by walking `window` for names matching
 `Hisense_*`, `HiUtils*`, `Hi[A-Z]*`, `File`, `Vidaa*`, `WebAp*` and printing

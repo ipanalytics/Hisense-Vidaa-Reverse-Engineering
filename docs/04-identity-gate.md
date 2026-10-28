@@ -1,5 +1,7 @@
 # 4. The identity / appconfig gate
 
+**Русская версия: [docs/ru/04-identity-gate.md](ru/04-identity-gate.md)**
+
 Everything privileged on this firmware is refused with one sentence:
 
 ```json

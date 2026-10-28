@@ -64,8 +64,19 @@ Two further attempts, both negative:
 
 - `execute('phoenix://service/hiutils', {method:'register', …})` is impossible
   through the SDK: `execute()` requires `parameters.api` and returns `false`
-  before any bytes are sent, so the `register` branch in `socketonmessage`
-  (sessions that survive a reply) is unreachable from page context.
+  before any bytes are sent. Opening a **raw** `wss://localhost:9888` and sending
+  the same body by hand does reach the service, and `register` is accepted there:
+
+  ```
+  session 9002  register + api=getOSVersion    -> {"msg":"registered","code":0}
+  session 9004  register + api=initialData     -> {"msg":"registered","code":0}
+  session 9003  register + api=deviceCode      -> 503 appconfig
+  session 9001  callAPI  + api=deviceCode      -> 503 appconfig
+  ```
+
+  So registration exists and sticks (the SDK keeps such sessions alive), but it
+  does not grant anything: registering a privileged API returns the same 503 as
+  calling it. The identity gate is not bypassed by protocol state.
 - `GET https://localhost:9888/` → `service register failed` — the registration
   endpoint exists but refuses unauthenticated calls.
 

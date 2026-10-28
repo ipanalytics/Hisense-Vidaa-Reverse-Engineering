@@ -44,7 +44,7 @@
 | `execute(…, {method:'register'})` | невозможно: `execute()` требует `parameters.api` и возвращает `false` до отправки |
 | `GET https://localhost:9888/` | `service register failed`, 503 |
 | Асинхронный `fetch`/XHR POST на `/service/<name>` | обрывается на CORS-префлайте (`onerror`) |
-| `setPkgmgrRequest('installApp')` | сознательно не вызывалось: это запись, вне рамок исследования |
+| `pkgmgr`: `installApp`, `install`, `installPkg` через GET-форму (без префлайта) | `Not supported api` — у службы вообще нет установочного api, так что дело даже не в правах |
 
 ## Когда установка исчезла
 

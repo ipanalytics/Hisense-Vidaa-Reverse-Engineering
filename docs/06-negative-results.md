@@ -43,7 +43,7 @@ the next person does not repeat it.
 | `execute(…, {method:'register'})` | impossible: `execute()` requires `parameters.api`, returns `false` before sending |
 | `GET https://localhost:9888/` | `service register failed`, 503 |
 | Async `fetch`/XHR POST to `/service/<name>` | blocked at CORS preflight (`onerror`) |
-| `syncExecute('pkgmgr', {api:'installApp'})` | never attempted deliberately — write path, out of scope |
+| `pkgmgr`: `installApp`, `install`, `installPkg` via the GET form (no preflight) | `Not supported api` — the service has no install API at all, so it is not even permission-gated |
 
 ## When the install path disappeared
 

@@ -17,6 +17,7 @@ it talks to the world, not to break a protection at any cost.
 - [05. Bridge surface: 96 host functions](docs/05-bridge-surface.md)
 - [06. Negative results](docs/06-negative-results.md)
 - [07. Tooling](docs/07-tooling.md)
+- [08. Function map by firmware](docs/08-function-map.md)
 
 Russian translations of every document live in [`docs/ru/`](docs/ru/).
 

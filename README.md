@@ -12,6 +12,7 @@ it talks to the world, not to break a protection at any cost.
 
 - [01. Firmware container](docs/01-firmware-container.md)
 - [02. Local services on the TV](docs/02-local-services.md)
+- [02b. What the TV exposes to the LAN](docs/02b-upnp-and-lan.md)
 - [03. The `phoenix://` bridge protocol](docs/03-phoenix-protocol.md)
 - [04. The identity / appconfig gate](docs/04-identity-gate.md)
 - [05. Bridge surface: 96 host functions](docs/05-bridge-surface.md)

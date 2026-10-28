@@ -12,6 +12,7 @@ Mediatek MT9603, если смотреть на него не через мен�
 
 - [01. Контейнер прошивки](docs/ru/01-firmware-container.md)
 - [02. Локальные службы телевизора](docs/ru/02-local-services.md)
+- [02b. Что телевизор отдаёт в локальную сеть](docs/ru/02b-upnp-and-lan.md)
 - [03. Протокол моста `phoenix://`](docs/ru/03-phoenix-protocol.md)
 - [04. Гейт идентичности и appconfig](docs/ru/04-identity-gate.md)
 - [05. Поверхность моста: 96 функций](docs/ru/05-bridge-surface.md)

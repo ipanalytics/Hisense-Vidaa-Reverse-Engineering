@@ -1,0 +1,13 @@
+# TCP surface as seen from another host on the same LAN (2026-10-28)
+
+open      36669   MQTT broker (mTLS required; see docs/09)
+open      18400   UPnP / DLNA MediaRenderer (unauthenticated, see upnp-18400.txt)
+closed    9226    chrome inspect — connection refused
+filtered  9223    CDP — no response (no RST, no SYN/ACK)
+closed    9222 9227 8080 8443 9443 8009 9009 9888
+
+Note on methodology: a burst scan of all 65535 ports (400 parallel connects,
+0.7 s timeout) reported nothing open, which is a false negative — the same
+script confirms 36669 and 18400 as open in a single paced connect. The TV
+appears to drop SYNs under scanning load, so burst results are not usable.
+Only per-port paced checks are trustworthy here.

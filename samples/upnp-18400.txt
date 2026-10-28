@@ -1,0 +1,55 @@
+# UPnP / DLNA surface on port 18400 — collected 2026-10-28
+# Values that identify the individual set (MAC, IP, UDN) are scrubbed.
+
+M-SEARCH ssdp:all -> 24 replies from the TV
+ST: upnp:rootdevice
+SERVER: Platform 1.0 His/1.0 UPnP/1.0 DLNADOC/1.50
+Location: http://<tv>:18400/MediaServer/rendererdevicedesc.xml
+
+GET /                                    -> 404
+GET /upnp/description.xml                -> 404
+GET /MediaServer/rendererdevicedesc.xml  -> 200
+
+--- descriptor (MAC/IP/UDN scrubbed) ---
+deviceType:  urn:schemas-upnp-org:device:MediaRenderer:1
+X_DLNADOC:   DMR-1.50
+friendlyName: My
+manufacturer: SmartTV
+modelName:    Renderer
+modelDescription:
+  #CAP#
+  mac=<redacted>
+  macWifi=<redacted>
+  macEthernet=<redacted>
+  ip=<redacted>
+  region=0
+  transport_protocol=3290
+  platform=1
+  voice=2
+  brand=his
+  vidaa_support=1
+
+--- services ---
+urn:schemas-upnp-org:service:ConnectionManager:1   SCPD /MediaServer/cm.xml    control /upnp/control/minguscmr
+urn:schemas-upnp-org:service:AVTransport:1         SCPD /MediaServer/avt.xml   control /upnp/control/mingusavtr
+urn:schemas-upnp-org:service:RenderingControl:1    SCPD /MediaServer/rc.xml    control /upnp/control/mingusrcr
+
+--- actions (from SCPD, argument names excluded) ---
+ConnectionManager: GetProtocolInfo, GetCurrentConnectionIDs, GetCurrentConnectionInfo
+AVTransport:       SetAVTransportURI, SetNextAVTransportURI, GetMediaInfo, GetTransportInfo,
+                   GetPositionInfo, GetDeviceCapabilities, GetTransportSettings, Stop, Play,
+                   Pause, Seek, Next, Previous, GetCurrentTransportActions, SetPlayMode,
+                   SetRecordQualityMode, GetCurrentTransportActions
+RenderingControl:  ListPresets, SelectPreset, GetVolume, SetVolume, GetMute, SetMute
+
+--- unauthenticated SOAP call ---
+POST /upnp/control/minguscmr   SOAPAction: ConnectionManager#GetProtocolInfo
+-> 200
+   Source: (empty)
+   Sink:   http-get:*:audio/x-pn-realaudio:*, http-get:*:image/mpo:*, http-get:*:video/mp4:*,
+           http-get:*:video/x-ms-wmx:*, http-get:*:audio/x-wav:*, http-get:*:video/x-ms-wvx:*,
+           http-get:*:video/quicktime:*, http-get:*:image/x-jps:*, http-get:*:video/avi:*,
+           http-get:*:video/x-pn-realvideo:*, http-get:*:application/vnd.android.package-archive:*,
+           http-get:*:video/3gpp:*, http-get:*:video/x-ms-asf:*, http-get:*:video/mpeg:*,
+           http-get:*:video/m2ts:*, http-get:*:video/x-matroska:*, http-get:*:image/png:*,
+           http-get:*:audio/mpeg:*, http-get:*:audio/mp4:*, ...

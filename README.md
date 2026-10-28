@@ -93,16 +93,16 @@ takes it from a native `vowOSContext`, and the native `init()` returns `-1` for
 an ordinary page. The attempts and their results are tabulated in
 [document four](docs/04-identity-gate.md), so nobody has to walk that path again.
 
-## Where it ends
+## Scope
 
 The web layer gave everything it had: the bridge map, three services, their API
 whitelist, the message format of the `phoenix://` protocol, and the exact place
 where permissions are checked. It did not give file access or a write path.
 
-What remains needs a screwdriver: UART, a bootloader shell, a dump of the
-partition holding the key. There is no UART document in this repository yet,
-because there is no UART data yet — the repository does not carry empty
-promises. When there is something, it will land here with the results.
+That is where this work stops. Everything here was observed on the device as
+shipped: no firmware was modified, no protection was defeated, no application
+was installed, and no access below the browser was attempted. These documents
+describe what the software does — not how to change it.
 
 ## What is in this repository
 

@@ -92,9 +92,9 @@ permissions.
 The only two ways past it are therefore outside the browser:
 
 1. get a document rendered **as an installed application** (the vendor's own
-   `hisense://debug` handler installs HTML5 apps on older firmware; on this
-   revision the install APIs themselves answer 503, so that door is closed
-   from inside), or
-2. run code outside the web layer entirely — bootloader/UART.
+   debug handler did that on older builds; on this revision the install APIs
+   answer 503, so the door is closed from inside), or
+2. execute at a level below the browser, which is outside the scope of this
+   document.
 
-Both are device-side operations, not protocol tricks.
+Neither is a protocol trick: both require the device, not a crafted message.

@@ -79,7 +79,6 @@ signature-driven, and there are no signatures to drive it.
 ## Consequence
 
 The body cannot be decrypted offline. The key lives on the device — in the boot
-partition or in eFuse — so any further work needs device-side access (UART,
-bootloader shell, or a key dump from a running system). The file itself remains
-useful as a recovery image for the exact model/version, and as a reference to
-compare against once a key is available.
+partition or in eFuse — so the image cannot be decrypted from the file alone.
+The file itself remains useful as a recovery image for the exact model/version,
+and as a reference to compare against later.

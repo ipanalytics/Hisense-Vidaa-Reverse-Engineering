@@ -45,6 +45,21 @@ the next person does not repeat it.
 | Async `fetch`/XHR POST to `/service/<name>` | blocked at CORS preflight (`onerror`) |
 | `syncExecute('pkgmgr', {api:'installApp'})` | never attempted deliberately — write path, out of scope |
 
+## When the install path disappeared
+
+The removal is not sudden — it has a timeline, partly from other people's
+reports and partly confirmed here:
+
+| Build | Web-app install via the debug path |
+|---|---|
+| `N0519`, `O0904` (2023–2024) | worked; users installed and later had to downgrade to keep the app |
+| `P0603` (2025) | gone — `Hisense_installApp` no longer present |
+| `Q0612` (2026, this device) | confirmed dead: handler absent, `install`/`uninstallApp` answer 503, 41 of 113 reference `Hisense_*` names removed |
+
+The first two rows are other people's reports; the third was measured on the
+device described here. Treat the table as a starting point for a proper
+version-by-version map, not as a finished one.
+
 ## What the negatives mean
 
 The permission model is not enforced at the JavaScript layer, so no amount of

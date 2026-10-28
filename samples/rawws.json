@@ -1,0 +1,165 @@
+{
+ "name": "rawws",
+ "env": {
+  "omi_window_type": "undefined",
+  "has_omi_platform": "object",
+  "dial_info": "{\"enable\":true,\"app_list\":[\"Youtube\",\"Youtube_Tv\",\"Youtube_Kids\",\"Netflix\",\"AMAZON\",\"catel\",\"iplayer\"]}",
+  "currentBrowser": "odin",
+  "navAppIdentifier": "undefined",
+  "ctxInit": "-1"
+ },
+ "ws": [
+  {
+   "raw": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"session\":9001,\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "session": 9001,
+   "ret": false,
+   "code": 503,
+   "msg": "client request permission check error, please check appconfig"
+  },
+  {
+   "raw": "{\"ret\":false,\"msg\":\"registered\",\"session\":9002,\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "session": 9002,
+   "ret": false,
+   "code": 0,
+   "msg": "registered"
+  },
+  {
+   "raw": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"session\":9003,\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "session": 9003,
+   "ret": false,
+   "code": 503,
+   "msg": "client request permission check error, please check appconfig"
+  },
+  {
+   "raw": "{\"ret\":false,\"msg\":\"registered\",\"session\":9004,\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "session": 9004,
+   "ret": false,
+   "code": 0,
+   "msg": "registered"
+  },
+  {
+   "raw": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"session\":9005,\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "session": 9005,
+   "ret": false,
+   "code": 0,
+   "msg": "{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"}"
+  }
+ ],
+ "events": [],
+ "setters": [
+  {
+   "key": "brightness",
+   "before": "50",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "contrast",
+   "before": "80",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "kidsMode",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "artMode",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "storeMode",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "isHotelMode",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "hotelMode",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "dabTools",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "volume",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "mute",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "magnificationEnable",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "ttsEnable",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "featureCode",
+   "before": "\"<redacted>\"",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "region",
+   "before": "\"EU_A\"",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "country",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "panelType",
+   "before": "0",
+   "readError": null,
+   "write": "ok:true"
+  },
+  {
+   "key": "source",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "menuScheme",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  },
+  {
+   "key": "menuTransparency",
+   "before": "null",
+   "readError": null,
+   "write": "err:Cannot read properties of null (reading 'toString')"
+  }
+ ]
+}

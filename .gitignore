@@ -1,0 +1,7 @@
+*.bin
+*.pkg
+*.zip
+*.7z
+raw/
+dumps/
+__pycache__/

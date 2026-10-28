@@ -1,0 +1,86 @@
+{
+ "name": "ctxinit",
+ "ctx": {
+  "init_src": "function init() { [native code] }",
+  "init_val": "-1",
+  "getAppIdentifier_src": "function getAppIdentifier() { [native code] }",
+  "getAppIdentifier_val": "",
+  "getAppId_src": "function getAppId() { [native code] }",
+  "getAppId_val": "",
+  "nav": {
+   "tries": [
+    "instance-get"
+   ],
+   "now": "ZQID"
+  },
+  "identAfter": ""
+ },
+ "ws": [
+  {
+   "id": "tv.vidaa.app.browser",
+   "result": {
+    "ok": false,
+    "msg": "\"client request permission check error, please check appconfig\""
+   }
+  },
+  {
+   "id": "tv.vidaa.res.iot",
+   "result": {
+    "ok": false,
+    "msg": "\"client request permission check error, please check appconfig\""
+   }
+  },
+  {
+   "id": "",
+   "result": {
+    "ok": false,
+    "msg": "\"client request permission check error, please check appconfig\""
+   }
+  }
+ ],
+ "http": [
+  {
+   "id": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "ok": false
+  },
+  {
+   "id": "tv.vidaa.res.iot",
+   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "ok": false
+  },
+  {
+   "id": "",
+   "result": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "ok": false
+  }
+ ],
+ "files": [
+  {
+   "path": "/etc/version",
+   "ret": false,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "path": "/etc/passwd",
+   "ret": false,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/passwd\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "path": "/etc/group",
+   "ret": false,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/group\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "path": "/proc/version",
+   "ret": false,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/proc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "path": "/proc/cmdline",
+   "ret": false,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/proc/cmdline\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  }
+ ],
+ "userAgent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 ViewPort/8.3.5 Safari/537.36"
+}

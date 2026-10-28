@@ -1,0 +1,97 @@
+{
+ "name": "identfor",
+ "env": {
+  "hasContext": true,
+  "contextType": "object",
+  "navAppId": "undefined",
+  "identifierNow": ""
+ },
+ "tries": [
+  {
+   "id": "tv.vidaa.app.browser",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "com.hisense.browser",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "tv.vidaa.res.iot",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "browser",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "system",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "root",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "vidaa",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "hisense",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "tv.vidaa.app.settings",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "com.vidaa.browser",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "tv.vidaa.app.browser/9.6.0",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  },
+  {
+   "id": "APPS:pkgs/tv.vidaa.app.browser",
+   "deviceCode": "{\"ret\":false,\"msg\":\"client request permission check error, please check appconfig\",\"code\":503,\"sdkVersion\":\"1.5.0\"}",
+   "fileRead": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}",
+   "devOk": false,
+   "stillUndefined": true
+  }
+ ],
+ "files": [],
+ "userAgent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 ViewPort/8.3.5 Safari/537.36"
+}

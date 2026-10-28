@@ -25,15 +25,24 @@ uninstall.
 
 ### Serving them
 
-Any HTTP server on the LAN works, for example:
+`tools/server.py` is the collector used during the research: it serves the pages,
+hands out the path queue on `/job`, and stores whatever the TV posts to `/probe`
+and `/upload` under `dumps/`.
 
 ```bash
-python3 -m http.server 8090 --bind 0.0.0.0
+python3 tools/server.py --port 8090 --http
 ```
 
-Open `http://<server>:8090/p.html` in the TV's browser. Results arrive by POST;
-the reference server used during the research also accepted `/probe` and
-`/upload` and wrote the JSON files now in `samples/`.
+Open `http://<server>:8090/p.html` in the TV's browser.
+
+Behaviour is pinned by `tools/test_server.py` (stdlib `unittest`, no network
+access, nine tests):
+
+```bash
+cd tools && python3 -m unittest test_server
+```
+
+Any other static server works too if you only need the pages — `python3 -m http.server 8090` — but then results are not collected.
 
 The pages derive the collector URL from nothing but relative paths, so they work
 unchanged on any host. **Do not hardcode your own address before publishing.**

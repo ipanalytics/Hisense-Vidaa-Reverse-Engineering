@@ -60,6 +60,21 @@ The first two rows are other people's reports; the third was measured on the
 device described here. Treat the table as a starting point for a proper
 version-by-version map, not as a finished one.
 
+## VIDAA DevKit
+
+DevKit installs on this model with the store code `2775379` (focus on the App
+Store search icon, type the digits, do not press OK). It appears under
+More Apps and shows platform, SoC, MAC and Device Code.
+
+Activation is the dead end. The App Manager needs a per-device **secure code**
+issued by VIDAA to partners; the app itself points at a partner address. For
+non-partners there is no self-service path, and `MT9603` does not appear in the
+vendor's published support table for DevKit — the platform list stops at
+MT9900 / NT72671D / MT9602 / MSD6886.
+
+So on this build DevKit is useful only as a diagnostic screen, not as a way to
+run a page as an installed application.
+
 ## What the negatives mean
 
 The permission model is not enforced at the JavaScript layer, so no amount of

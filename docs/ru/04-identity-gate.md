@@ -70,8 +70,19 @@ navigator.appIdentifier — геттер на прототипе Navigator, от
 
 - `execute('phoenix://service/hiutils', {method:'register', …})` через SDK
   невозможен: `execute()` требует `parameters.api` и возвращает `false` до
-  отправки. Ветка `register`, в которой сессии переживают ответ, из страницы
-  недостижима.
+  отправки. Но если открыть **свой** `wss://localhost:9888` и послать то же
+  тело руками, служба отвечает, и `register` принимается:
+
+  ```
+  сессия 9002  register + api=getOSVersion  -> {"msg":"registered","code":0}
+  сессия 9004  register + api=initialData   -> {"msg":"registered","code":0}
+  сессия 9003  register + api=deviceCode    -> 503 appconfig
+  сессия 9001  callAPI  + api=deviceCode    -> 503 appconfig
+  ```
+
+  То есть регистрация существует и закрепляется (SDK такие сессии не удаляет),
+  но прав не даёт: регистрация привилегированного api возвращает тот же 503,
+  что и обычный вызов. Гейт идентичности состоянием протокола не обходится.
 - `GET https://localhost:9888/` отвечает `service register failed`. Точка
   регистрации есть, но неаутентифицированный вызов она отвергает.
 

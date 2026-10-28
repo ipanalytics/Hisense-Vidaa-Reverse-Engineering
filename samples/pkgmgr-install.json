@@ -1,0 +1,32 @@
+{
+ "name": "pkgmgr-install",
+ "calls": [
+  {
+   "api": "definitelyNotAnApi",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "error": null
+  },
+  {
+   "api": "installApp",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "error": null
+  },
+  {
+   "api": "installPkg",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "error": null
+  },
+  {
+   "api": "install",
+   "status": 200,
+   "text": "{\"ret\":false,\"msg\":\"Not supported api\",\"code\":500,\"session\":-1,\"sdkVersion\":\"1.5.0\"}",
+   "error": null
+  }
+ ],
+ "before": [],
+ "after": [],
+ "note": "pkgmgr whitelist has one name: getInstalledPkgs. installApp/installPkg/install all answer 'Not supported api'."
+}

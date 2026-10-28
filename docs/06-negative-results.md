@@ -72,6 +72,20 @@ non-partners there is no self-service path, and `MT9603` does not appear in the
 vendor's published support table for DevKit — the platform list stops at
 MT9900 / NT72671D / MT9602 / MSD6886.
 
+The device screen asks for a **file**, not a typed code: *"Insert the flash drive
+with securecode.key"*, then `Verify`. So the flow is U6-style — the site only
+needs one file on a FAT32 stick, but the file itself is still issued per device
+by the vendor.
+
+Diagnostic values DevKit shows on this build (identifying fields omitted):
+
+```
+Platform:          MTK9603_EU_A
+Model:             65Q60SEVS_01
+Firmware Version:  V0000.09.60V.Q0612 (release)
+OAA Version:       U09.60
+```
+
 So on this build DevKit is useful only as a diagnostic screen, not as a way to
 run a page as an installed application.
 
